@@ -1,6 +1,7 @@
 
 class ListComplexPlane(AbsComplexPlane):
 
+    plane = []
     for i in range(xlen):
         for k in range(ylen):
             self.plane.append([xmin+i*dx ,(ymin+k*dy)*1j])
@@ -14,7 +15,10 @@ class ListComplexPlane(AbsComplexPlane):
         ymin  = 0.0
         ymax  = 100.0
         ylen  = 100
-        plane = [[0 for x in range(xlen)] for y in range(ylen)]
+        plane = []
+        for i in range(xlen):
+            for k in range(ylen):
+                self.plane.append([xmin+i*dx ,(ymin+k*dy)*1j])
         fs    = []
 
     def __init__(self,xmin,xmax,xlen,ymin,ymax,ylen):
@@ -37,7 +41,7 @@ class ListComplexPlane(AbsComplexPlane):
             for k in range(self.ylen):
                 plane.append([self.xmin+i*dx ,(self.ymin+k*dy)*1j])
 
-        fs   = []
+        fs = []
 
     def apply(self, f):
 
