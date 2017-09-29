@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+"""
 ###
 # Name: Kristaaaa, Atabak
 # Student ID: KristaIDHere, AtabakIDHere
@@ -8,31 +8,44 @@
 # Course: CS510 Fall 2017
 # Assignment: Classwork 5
 ###
-
+"""
 from abscplane import AbsComplexPlane
 
 
 class ListComplexPlane(AbsComplexPlane):
-    fs = []
-    plane = []
-    for i in range(xlen):
-        for k in range(ylen):
-            self.plane.append([xmin + i * dx, (ymin + k * dy) * 1j])
+    """This Class creates a plane based on complex numbers.
 
-    def __init__(self):
-        xmin = 0.0
-        xmax = 100.0
-        xlen = 100
-        ymin = 0.0
-        ymax = 100.0
-        ylen = 100
+       Attributes:
+        xmax (float) : maximum horizontal axis value
+        xmin (float) : minimum horizontal axis value
+        xlen (int)   : number of horizontal points
+        ymax (float) : maximum vertical axis value
+        ymin (float) : minimum vertical axis value
+        ylen (int)   : number of vertical points
+        plane        : stored complex plane implementation
+        fs (list[function]) : function sequence to transform plane
+    """
+    def __create_plane(self, xmin, xmax, xlen, ymin, ymax, ylen):
+        dx = (xmax - xmin) / (xlen - 1)
+        dy = (ymax - ymin) / (ylen - 1)
         plane = []
         for i in range(xlen):
             for k in range(ylen):
-                self.plane.append([xmin + i * dx, (ymin + k * dy) * 1j])
+                plane.append([xmin + i * dx, (ymin + k * dy) * 1j])
+        return plane
+
+    def __init__(self):
+        self.xmin = 0.0
+        self.xmax = 100.0
+        self.xlen = 100
+        self.ymin = 0.0
+        self.ymax = 100.0
+        self.ylen = 100
+        self.plane = self.__create_plane(self.xmin, self.xmax, self.xlen,
+                                         self.ymin, self.ymax, self.ylen)
+        fs = []
 
     def __init__(self, xmin, xmax, xlen, ymin, ymax, ylen):
-
         self.xmin = xmin
         self.xmax = xmax
         self.xlen = xlen
@@ -40,36 +53,29 @@ class ListComplexPlane(AbsComplexPlane):
         self.ymax = ymax
         self.ylen = ylen
         self.fs = []
-        for i in range(xlen):
-            for k in range(ylen):
-                self.plane.append([xmin + i * dx, (ymin + k * dy) * 1j])
+        self.plane = self.__create_plane(self.xmin, self.xmax, self.xlen,
+                                         self.ymin, self.ymax, self.ylen)
 
     def refresh(self):
-
-        for i in range(self.xlen):
-            for k in range(self.ylen):
-                self.plane.append([self.xmin + i * dx, (self.ymin + k * dy) * 1j])
-
-        fs[:] = []
+        self.plane = self.__create_plane(self.xmin, self.xmax, self.xlen,
+                                         self.ymin, self.ymax, self.ylen)
+        self.fs = []
 
     def apply(self, f):
-
         for p in self.plane:
             f(p)
 
         self.fs.append(f)
 
     def zoom(self, xmin, xmax, xlen, ymin, ymax, ylen):
-
         self.xmin = xmin
         self.xmax = xmax
         self.xlen = xlen
         self.ymin = ymin
         self.ymax = ymax
         self.ylen = ylen
-        for i in range(xlen):
-            for k in range(ylen):
-                self.plane.append([xmin + i * dx, (ymin + k * dy) * 1j])
+        self.plane = self.__create_plane(self.xmin, self.xmax, self.xlen,
+                                         self.ymin, self.ymax, self.ylen)
 
         for f in self.fs:
             for p in self.plane:
