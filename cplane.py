@@ -1,47 +1,56 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+###
+# Name: Kristaaaa, Atabak
+# Student ID: KristaIDHere, AtabakIDHere
+# Email:  kristaEmailHere , AtabakEmail
+# Course: CS510 Fall 2017
+# Assignment: Classwork 5
+###
+
+from abscplane import AbsComplexPlane
+
 
 class ListComplexPlane(AbsComplexPlane):
-
+    fs = []
     plane = []
     for i in range(xlen):
         for k in range(ylen):
-            self.plane.append([xmin+i*dx ,(ymin+k*dy)*1j])
-
-
+            self.plane.append([xmin + i * dx, (ymin + k * dy) * 1j])
 
     def __init__(self):
-        xmin  = 0.0
-        xmax  = 100.0
-        xlen  = 100
-        ymin  = 0.0
-        ymax  = 100.0
-        ylen  = 100
+        xmin = 0.0
+        xmax = 100.0
+        xlen = 100
+        ymin = 0.0
+        ymax = 100.0
+        ylen = 100
         plane = []
         for i in range(xlen):
             for k in range(ylen):
-                self.plane.append([xmin+i*dx ,(ymin+k*dy)*1j])
-        fs    = []
+                self.plane.append([xmin + i * dx, (ymin + k * dy) * 1j])
 
-    def __init__(self,xmin,xmax,xlen,ymin,ymax,ylen):
+    def __init__(self, xmin, xmax, xlen, ymin, ymax, ylen):
 
-        self.xmin  = xmin
-        self.xmax  = xmax
-        self.xlen  = xlen
-        self.ymin  = ymin
-        self.ymax  = ymax
-        self.ylen  = ylen
+        self.xmin = xmin
+        self.xmax = xmax
+        self.xlen = xlen
+        self.ymin = ymin
+        self.ymax = ymax
+        self.ylen = ylen
         self.fs = []
         for i in range(xlen):
             for k in range(ylen):
-                self.plane.append([xmin+i*dx ,(ymin+k*dy)*1j])
+                self.plane.append([xmin + i * dx, (ymin + k * dy) * 1j])
 
-
-    def refresh():
+    def refresh(self):
 
         for i in range(self.xlen):
             for k in range(self.ylen):
-                plane.append([self.xmin+i*dx ,(self.ymin+k*dy)*1j])
+                self.plane.append([self.xmin + i * dx, (self.ymin + k * dy) * 1j])
 
-        fs = []
+        fs[:] = []
 
     def apply(self, f):
 
@@ -50,29 +59,18 @@ class ListComplexPlane(AbsComplexPlane):
 
         self.fs.append(f)
 
-    def zoom(self,xmin,xmax,xlen,ymin,ymax,ylen):
+    def zoom(self, xmin, xmax, xlen, ymin, ymax, ylen):
 
-        self.xmin  = xmin
-        self.xmax  = xmax
-        self.xlen  = xlen
-        self.ymin  = ymin
-        self.ymax  = ymax
-        self.ylen  = ylen
+        self.xmin = xmin
+        self.xmax = xmax
+        self.xlen = xlen
+        self.ymin = ymin
+        self.ymax = ymax
+        self.ylen = ylen
         for i in range(xlen):
             for k in range(ylen):
-                self.plane.append([xmin+i*dx ,(ymin+k*dy)*1j])
+                self.plane.append([xmin + i * dx, (ymin + k * dy) * 1j])
 
         for f in self.fs:
             for p in self.plane:
                 f(p)
-            
-            
-            
-            
-
-            
-            
-            
-            
-            
-            
