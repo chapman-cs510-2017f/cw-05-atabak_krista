@@ -62,8 +62,8 @@ class ListComplexPlane(AbsComplexPlane):
         self.fs = []
 
     def apply(self, f):
-        for p in self.plane:
-            f(p)
+        for idx, p in enumerate(self.plane):
+            self.plane[idx] = f(p)
 
         self.fs.append(f)
 
@@ -78,5 +78,4 @@ class ListComplexPlane(AbsComplexPlane):
                                          self.ymin, self.ymax, self.ylen)
 
         for f in self.fs:
-            for p in self.plane:
-                f(p)
+            self.apply(f)
